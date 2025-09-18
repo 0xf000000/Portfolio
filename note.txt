@@ -1,0 +1,7 @@
+-Color Palette
+Blue -> 0D1164
+Lilia -> 640D5F
+
+Pink -> EA2264
+
+Beshe -> F78D60
