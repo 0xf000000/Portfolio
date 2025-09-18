@@ -1,16 +1,24 @@
 import { drawLine, getPoint, calculateNewPoint } from "./draw.js";
+import { ObjectMesh } from "./ObjectMesh.js";
 
 
-export default class FracTree {
+export default class FracTree extends ObjectMesh {
 
-    constructor(ctx, baseangle) {
+    constructor(baseangle, xPos, yPos) {
+        super();
         this.bend = 0.1;
-        this.ctx = ctx;
+        this.ctx = null;
+        this.xPos = xPos;
+        this.yPos = yPos;
         this.baseangle = baseangle;
         this.direction = true;
-
+        
         this.allPoints = [];
     }
+
+
+
+    
 
     incAngle(angle, baseangle, bend) { return angle + baseangle + bend};
     decAngle(angle, baseangle, bend) {  return angle - baseangle - bend};
@@ -41,7 +49,7 @@ export default class FracTree {
 
     drawTree(ctx, baseangle) {
         
-        const start = getPoint(window.innerWidth / 2, window.innerHeight, 0);
+        const start = getPoint(this.xPos, this.yPos , 0);
         const root = calculateNewPoint(start, 0, 300);
         const allPoints = [];
         let lineLength = 150;
@@ -77,7 +85,7 @@ export default class FracTree {
        
     }
 
-    drawLoop(){
+    draw(){
         this.checkAngle();
 
         this.ctx.fillText(`Angle: ${this.baseangle}`, 20, 20, 500);

@@ -1,4 +1,30 @@
+
+:root{
+    --Blue: #0D1164;
+    --Lilia:#640D5F;
+
+    --Pink: #EA2264;
+
+    --Beshe:#F78D60;
+}
+
 body{
+    --first-color: #F78D60;
     padding: 0px;
     margin: 0px;
+    overflow: hidden;
+}
+
+
+canvas{
+ z-index: -1;
+ top: 0;
+ left: 0;
+ position: fixed;
+}
+
+
+nav{
+    z-index: 1;
+    color: var(--Beshe);
 }

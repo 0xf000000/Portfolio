@@ -1,5 +1,7 @@
+import { Drops } from "./drops.js";
 import { KEYCODES } from "./keyCodes.js"
 import Renderer from "./render.js";
+import FracTree from "./tree.js";
 
 
 window._stopped = false;
@@ -88,15 +90,34 @@ function setupEventListeners(canvas,ctx){
 }
 
 
+
+function setupObjectMeshes(){
+    let objects = [];
+
+
+
+    let tree1 = new FracTree(0.0, window.innerWidth / 4, window.innerHeight);
+    let tree2 = new FracTree(0.0, (window.innerWidth / 4 ) * 3, window.innerHeight);
+    let drops = new Drops(100);
+
+    objects.push(tree1, tree2, drops);
+
+    return objects;
+}
+
+
+
 function main() {
 
     const { canvas, ctx } = setupCanvas();
-    const renderer = new Renderer(ctx);
-    const angle = 0.0
+    const objectMeshes = setupObjectMeshes();
+    const renderer = new Renderer(ctx, objectMeshes);
+
+    
 
     setupEventListeners(canvas, ctx);
    
-    renderer.renderLoop(angle);
+    renderer.render();
 
     return;
 }

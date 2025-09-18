@@ -8,6 +8,7 @@ export function drawLine(ctx, start, end) {
     return;
 }
 
+// yeah i know but f it dont wanna do class
 export function getPoint(x, y, angle) {
     return { x: x, y: y, angle: angle }
 }
