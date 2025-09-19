@@ -9,9 +9,9 @@ export class Drops extends ObjectMesh{
         this.drops = [];
         this.DROP_COUNT = count;
         
-        this.WIND_VELOCITY = 0.5;
-        this.DROP_MIN_VELOCITY = 0.2;
-        this.DROP_MAX_VELOCITY = 0.6;
+        this.WIND_VELOCITY = 12;
+        this.DROP_MIN_VELOCITY = 12.8;
+        this.DROP_MAX_VELOCITY = 19.2;
 
         this.DROP_MIN_LENGTH = 20;
         this.DROP_MAX_LENGTH = 40;
@@ -42,7 +42,7 @@ export class Drops extends ObjectMesh{
     resetDrop(drop){
         let scale = Math.random();
 
-        drop.x = getRandomInt(0, window.innerWidth);
+        drop.x = getRandomInt(-(window.innerWidth / 2), window.innerWidth);
         drop.vx = this.WIND_VELOCITY;
         drop.vy = lerp(this.DROP_MIN_VELOCITY, this.DROP_MAX_VELOCITY, scale);
         drop.l = lerp(this.DROP_MIN_LENGTH, this.DROP_MAX_LENGTH, scale);
@@ -57,7 +57,7 @@ export class Drops extends ObjectMesh{
             drop.x += drop.vx * dt;
             drop.y += drop.vy * dt;
 
-            if(drop.y > window.innerHeight + drop.l){
+            if(drop.y > window.innerHeight + drop.l && drop.x > window.innerWidth - drop.l){
               drop =  this.resetDrop(drop)
             }
 
@@ -70,8 +70,8 @@ export class Drops extends ObjectMesh{
         this.ctx.save();
 
         this.ctx.strokeStyle = "lightblue";
-        this.ctx.lineWidth = 2;
-        this.ctx.compositeOperation = "lighter";
+        this.ctx.lineWidth = 0.5;
+        this.ctx.globalCompositeOperation = "lighter";
     
         return;
     }
@@ -79,6 +79,8 @@ export class Drops extends ObjectMesh{
 
 
     draw(){
+
+        this.setupCTX();
         
         for(let i = 0; i < this.drops.length; i++){
 

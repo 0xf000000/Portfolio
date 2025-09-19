@@ -72,10 +72,11 @@ export default class FracTree extends ObjectMesh {
 
                 p1 = calculateNewPoint(point, leftAngle, lineLength)
                 p2 = calculateNewPoint(point, rightAngle, lineLength);
+                
 
                 drawLine(ctx, point, p1);
                 drawLine(ctx, point, p2);
-
+                
                 temp.push(p1, p2);
                 allPoints.push(p1, p2);
             }

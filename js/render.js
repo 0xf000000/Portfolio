@@ -1,3 +1,4 @@
+import { CanvasEventManager } from "./canvasEventManager.js";
 import fracTree from "./tree.js";
 
 // this is a little render class well not really because here is also some logic for the frac tree but i think like this is kinda okay otherwise i also would have to write a class for the frac then, what idont intend to do rn maby if more functionality comes
@@ -10,6 +11,8 @@ export default class Renderer {
        
         this.before = performance.now();
         this.meshObjects = meshObjects;
+        
+        this.canvasEventManager = new CanvasEventManager(this);
         this.configureCtx();
 
         

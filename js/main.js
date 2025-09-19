@@ -7,23 +7,7 @@ import FracTree from "./tree.js";
 window._stopped = false;
 
 
-function reziseCanvas(canvas, ctx){
-  
-    
-     
-    if(!canvas){ return; }
-     canvas.width = window.innerWidth;
-     canvas.height = window.innerHeight;
-    
-     if(!ctx){ return }
-     ctx.strokeStyle = "#EA2264";
-     ctx.lineWidth = 0.5; // increase for more visibility
-     ctx.lineJoin = "round";
-     ctx.lineCap = "round";
 
-    
-    //return dpr;
-}
 
 function setupCtx(canvas){
 
@@ -45,10 +29,12 @@ function setupCanvas() {
     const body = document.body;
     let canvas = document.createElement("canvas");
     let ctx;
-   
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
    
     body.appendChild(canvas);
-    reziseCanvas(canvas,null); 
+   
     
     canvas.style.border = "1px solid black";
     canvas.style.backgroundColor ="#0D1164";
@@ -82,7 +68,7 @@ function handleKeyInput(keyobj){
 
 
 function setupEventListeners(canvas,ctx){
-    window.addEventListener("resize", () => {reziseCanvas(canvas, ctx) });
+  
     window.addEventListener("keydown", (event) => {
         event.preventDefault();
         handleKeyInput(event)
@@ -96,14 +82,17 @@ function setupObjectMeshes(){
 
 
 
-    let tree1 = new FracTree(0.0, window.innerWidth / 4, window.innerHeight);
-    let tree2 = new FracTree(0.0, (window.innerWidth / 4 ) * 3, window.innerHeight);
-    let drops = new Drops(100);
-
-    objects.push(tree1, tree2, drops);
+  
+    let tree1 = new FracTree(0.0, (window.innerWidth / 2 ), window.innerHeight);
+    let drops = new Drops(1000);
+    
+    objects.push(drops,tree1);
 
     return objects;
 }
+
+// this is lokey shit i want to make the renderer somehow globally available but maby not like this so i can change the position of the objects in the event listener
+
 
 
 
@@ -113,6 +102,7 @@ function main() {
     const objectMeshes = setupObjectMeshes();
     const renderer = new Renderer(ctx, objectMeshes);
 
+    
     
 
     setupEventListeners(canvas, ctx);
